@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Read-only Schoology API exploration dashboard">
+	<title>Schoology API Explorer</title>
+	<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+	<header class="site-header">
+		<div class="header-inner">
+			<div>
+				<p class="eyebrow">Developer console</p>
+				<h1>Schoology API Explorer</h1>
+				<p class="subtitle">Inspect authenticated data through read-only GET requests.</p>
+			</div>
+			<span class="safety-badge">GET only</span>
+		</div>
+	</header>
+
+	<main class="dashboard">
+		<section class="panel connection-panel" aria-labelledby="connection-title">
+			<div class="panel-heading">
+				<div>
+					<p class="eyebrow">01 / Access</p>
+					<h2 id="connection-title">Connection</h2>
+				</div>
+				<span class="status-dot" aria-hidden="true"></span>
+			</div>
+			<p class="helper">Confirm that your configured Schoology credentials can reach the API.</p>
+			<button id="auth" type="button" class="button button-primary">Test authentication</button>
+			<pre id="authOut" class="output output-compact" aria-live="polite"></pre>
+		</section>
+
+		<section class="panel explorer-panel" aria-labelledby="explorer-title">
+			<div class="panel-heading">
+				<div>
+					<p class="eyebrow">02 / Explore</p>
+					<h2 id="explorer-title">API explorer</h2>
+				</div>
+				<span class="method-badge">GET</span>
+			</div>
+			<div class="form-grid">
+				<label for="cat">Category
+					<select id="cat"></select>
+				</label>
+				<label for="ep">Endpoint
+					<select id="ep"></select>
+				</label>
+				<label id="idBox" for="idIn" hidden>ID
+					<input id="idIn" autocomplete="off" inputmode="numeric" placeholder="Enter an ID">
+				</label>
+			</div>
+			<button id="send" type="button" class="button button-primary">Send request</button>
+			<div class="custom-request">
+				<label for="custom">Custom GET path</label>
+				<div class="inline-form">
+					<input id="custom" placeholder="/v1/users/72667300/groups" autocomplete="off" spellcheck="false">
+					<button id="customGo" type="button" class="button button-secondary">Run</button>
+				</div>
+			</div>
+		</section>
+
+		<section class="panel response-panel" aria-labelledby="response-title">
+			<div class="panel-heading">
+				<div>
+					<p class="eyebrow">03 / Inspect</p>
+					<h2 id="response-title">Response</h2>
+				</div>
+				<button id="copy" type="button" class="button button-quiet">Copy JSON</button>
+			</div>
+			<div id="meta" class="response-meta" aria-live="polite">No request made yet.</div>
+			<pre id="out" class="output" tabindex="0">Choose an endpoint to begin.</pre>
+		</section>
+
+		<section class="panel discovery-panel" aria-labelledby="discovery-title">
+			<div class="panel-heading">
+				<div>
+					<p class="eyebrow">04 / Discover</p>
+					<h2 id="discovery-title">Resources</h2>
+				</div>
+			</div>
+			<div class="action-row">
+				<button id="disc" type="button" class="button button-secondary">Discover users</button>
+				<button id="mySec" type="button" class="button button-secondary">Load my sections</button>
+			</div>
+			<div id="discOut" class="data-region" aria-live="polite"></div>
+			<div id="related" class="data-region"></div>
+			<div id="secOut" class="data-region" aria-live="polite"></div>
+			<div id="asgOut" class="data-region"></div>
+		</section>
+
+		<section class="panel scan-panel" aria-labelledby="scan-title">
+			<div class="panel-heading">
+				<div>
+					<p class="eyebrow">05 / Audit</p>
+					<h2 id="scan-title">API scan</h2>
+				</div>
+				<span class="method-badge">READ ONLY</span>
+			</div>
+			<p class="helper">Probe the configured endpoint catalog and collect response classifications.</p>
+			<button id="scan" type="button" class="button button-primary">Scan API</button>
+			<div class="progress-track" role="progressbar" aria-label="API scan progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+				<div id="fill" class="progress-fill"></div>
+			</div>
+			<pre id="scanOut" class="output output-compact" aria-live="polite"></pre>
+		</section>
+
+		<section class="panel history-panel" aria-labelledby="history-title">
+			<div class="panel-heading">
+				<div>
+					<p class="eyebrow">06 / Review</p>
+					<h2 id="history-title">Request history</h2>
+				</div>
+			</div>
+			<div id="hist" class="history-list" aria-live="polite"></div>
+		</section>
+	</main>
+
+	<footer class="site-footer">Schoology API Explorer <span aria-hidden="true">/</span> read-only console</footer>
+	<script src="/static/app.js"></script>
+</body>
+</html>
